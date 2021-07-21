@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecom-frontend-deployment
+spec:
+  selector:
+    matchLabels:
+      app: ecom-frontend-deployment
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: ecom-frontend-deployment
+    spec:
+      containers:
+        - name: ecom-frontend-application
+          image: "skrajend/ecommerce:v1"
+          ports:
+            - name: tcp
+              containerPort: 5000
