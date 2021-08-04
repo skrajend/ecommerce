@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: ecom-frontend-application
-          image: "skrajend/ecommerce:v1"
+          image: "skrajend/ecommerce:latest"
           ports:
             - name: tcp
               containerPort: 5000
