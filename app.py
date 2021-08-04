@@ -7,5 +7,5 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
     hostname = socket.gethostname()
-    message = "Welcome to E-Comm Application. Pod Name  : " + hostname
+    message = "Welcome to E-Commerce Application. Pod Name  : " + hostname
     return message
