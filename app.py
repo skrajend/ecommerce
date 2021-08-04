@@ -6,9 +6,10 @@ import time
 app = Flask(__name__)
 
 cache = redis.Redis(
-    host='my-release-redis',
+    host='10.2.29.198',
     port='6379',
     password='SVTvj7w2iP')
+
 
 def get_hit_count():
     retries = 5
