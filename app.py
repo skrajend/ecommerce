@@ -11,7 +11,7 @@ app = Flask(__name__)
     port='6379',
     password='Kk5ue0Fx8B')"""
 
-redis_sentinel = Sentinel([('ecom-backend-redis.default.svc.cluster.local', '26379')], password='Kk5ue0Fx8B')
+redis_sentinel = Sentinel([('ecom-backend-redis.default.svc.cluster.local', '26379')], password='EfZCuJvBg5')
 redis_master = redis_sentinel.master_for('mymaster')
 
 
