@@ -12,8 +12,8 @@ app = Flask(__name__)
     password='SVTvj7w2iP')"""
 
 redis_sentinel = Sentinel([('ecom-backend-redis.default.svc.cluster.local', '26379')], password='SVTvj7w2iP',
-                          sentinel_kwargs={"password": "SVTvj7w2iP"}, socket_timeout=0.1)
-redis_master = redis_sentinel.discover_master('mymaster')
+                          sentinel_kwargs={"password": "SVTvj7w2iP"})
+redis_master = redis_sentinel.master_for('mymaster')
 
 
 def get_hit_count():
