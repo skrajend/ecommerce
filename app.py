@@ -9,7 +9,7 @@ app = Flask(__name__)
 config = {
     'user': 'root',
     'password': 'Welcome1234',
-    'host': 'localhost',
+    'host': 'mycluster',
     'port': '6446',
     'database': 'test',
     'autocommit': 'true'
