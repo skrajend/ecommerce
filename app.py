@@ -33,5 +33,5 @@ def hello_world():
         message = message + "<br>You've visited me {} times.\n".format(rc)
     return message
 
-if __name__ == "__main__":
-    app.run()
+#if __name__ == "__main__":
+#    app.run()
