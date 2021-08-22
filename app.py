@@ -1,47 +1,37 @@
-from flask import Flask, render_template, request
-import mysql.connector
-from mysql.connector import errorcode
-from mysql.connector.constants import ClientFlag
+from flask import Flask
 import socket
+import psycopg2
 
 app = Flask(__name__)
 
+#'host': 'pq1-postgresql-ha-pgpool.default.svc.cluster.local',
 config = {
-    'user': 'root',
-    'password': 'Welcome1234',
-    'host': 'mycluster.default.svc.cluster.local',
-    'port': '6446',
+    'user': 'postgres',
+    'password': 'Welcome123',
+    'host': 'pq1-postgresql-ha-pgpool.default.svc.cluster.local',
+    'port': '5432',
     'database': 'test'
 }
-
 
 @app.route('/')
 def hello_world():
     hostname = socket.gethostname()
     message = "Welcome to E-Commerce Application. Pod Name  : " + hostname
     try:
-        cnx = mysql.connector.connect(**config)
-    except mysql.connector.Error as err:
-        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-            print("Something is wrong with your user name or password")
-            message = "Something is wrong with your user name or password"
-        elif err.errno == errorcode.ER_BAD_DB_ERROR:
-            print("Database does not exist")
-            message = "Database does not exist"
-        else:
-            print(err)
-            message = "Not Sure What is the Problem"
+        cnx = psycopg2.connect(**config)
+    except (Exception, psycopg2.DatabaseError) as err:
+        print(err)
+        message = "Not Sure What is the Problem"
     else:
-        cur = cnx.cursor(buffered=True)
-        cur.execute("insert into test11(name) values ('A');")
-        cur.execute("select * from test.test11")
+        cur = cnx.cursor()
+        cur.execute("insert into test1(name) values ('A')")
+        cur.execute("select * from test1")
         cur.fetchall()
         rc = cur.rowcount
         cnx.commit()
-        cur.close()
         cnx.close()
-        message = message + "You've visited me {} times.\n".format(rc)
+        message = message + "<br>You've visited me {} times.\n".format(rc)
     return message
 
-#if __name__ == "__main__":
-#    app.run()
+if __name__ == "__main__":
+    app.run()
